@@ -1,7 +1,7 @@
 let players = JSON.parse(localStorage.getItem("kboPlayers")) || [
   { name: "이정후", team: "키움 히어로즈", position: "외야수" },
   { name: "양의지", team: "두산 베어스", position: "포수" },
-  { name: "김하성", team: "KT 위즈", position: "내야수" },
+  { name: "김상수", team: "KT 위즈", position: "내야수" },
   { name: "최정", team: "SSG 랜더스", position: "내야수" },
   { name: "구창모", team: "NC 다이노스", position: "투수" },
   { name: "박건우", team: "NC 다이노스", position: "외야수" },
