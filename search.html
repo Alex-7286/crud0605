@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>KBO 2025 선수 조회</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pretendard&display=swap">
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    #searchBar, #registerForm {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    #playerList {
+      max-width: 600px;
+      margin: auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .player {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .player:last-child {
+      border-bottom: none;
+    }
+    input, select {
+      padding: 10px;
+      width: 180px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <h1>2025 KBO 선수 조회</h1>
+
+  <!-- 검색창 -->
+  <div id="searchBar">
+    <input type="text" id="searchInput" placeholder="선수 이름 또는 팀 검색" onkeyup="searchPlayers()">
+  </div>
+
+  <!-- 등록폼 -->
+  <div id="registerForm">
+    <input type="text" id="newName" placeholder="이름">
+    <select id="newTeam">
+      <option value="">-- 구단 선택 --</option>
+      <option value="LG 트윈스">LG 트윈스</option>
+      <option value="SSG 랜더스">SSG 랜더스</option>
+      <option value="두산 베어스">두산 베어스</option>
+      <option value="한화 이글스">한화 이글스</option>
+      <option value="키움 히어로즈">키움 히어로즈</option>
+      <option value="KIA 타이거즈">KIA 타이거즈</option>
+      <option value="롯데 자이언츠">롯데 자이언츠</option>
+      <option value="삼성 라이온즈">삼성 라이온즈</option>
+      <option value="KT 위즈">KT 위즈</option>
+      <option value="NC 다이노스">NC 다이노스</option>
+    </select>
+    <select id="newPosition">
+      <option value="">-- 포지션 선택 --</option>
+      <option value="내야수">내야수</option>
+      <option value="외야수">외야수</option>
+      <option value="포수">포수</option>
+      <option value="투수">투수</option>
+      <option value="지명타자">지명타자</option>
+    </select>
+    <button onclick="addPlayer()">등록</button>
+  </div>
+
+  <!-- 선수 리스트 -->
+  <div id="playerList"></div>
+
+  <!-- JS 분리 -->
+  <script src="search.js"></script>
+
+  <!-- 수정 모달 -->
+<div id="editModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+  background-color: rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:#fff; padding:20px; border-radius:12px; min-width:300px; max-width:90%;">
+    <h3 style="margin-top:0;">선수 정보 수정</h3>
+    <input type="text" id="editName" placeholder="이름" style="width:80%; margin-bottom:10px;" />
+    <input type="text" id="editTeam" placeholder="구단" style="width:80%; margin-bottom:10px;" />
+    <input type="text" id="editPosition" placeholder="포지션" style="width:80%; margin-bottom:20px;" />
+    <div style="text-align:right;">
+      <button onclick="closeModal()" style="margin-right:10px;">취소</button>
+      <button onclick="saveEdit()">저장</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

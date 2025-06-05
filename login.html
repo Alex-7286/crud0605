@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>로그인</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #1c3b70;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 48%;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:first-of-type {
+      background-color: #1c3b70;
+      color: white;
+    }
+
+    button:first-of-type:hover {
+      background-color: #154075;
+    }
+
+    button:last-of-type {
+      background-color: #eee;
+      color: #333;
+      margin-left: 4%;
+    }
+
+    button:last-of-type:hover {
+      background-color: #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>로그인</h2>
+    <input type="text" id="loginId" placeholder="아이디">
+    <input type="password" id="loginPw" placeholder="비밀번호">
+    <div style="display: flex; justify-content: space-between;">
+      <button onclick="login()">로그인</button>
+      <button onclick="goToRegister()">회원가입</button>
+    </div>
+  </div>
+
+  <script>
+    function login() {
+      const id = document.getElementById('loginId').value.trim();
+      const pw = document.getElementById('loginPw').value.trim();
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const found = users.find(user => user.id === id && user.pw === pw);
+
+      if (found) {
+        alert(`환영합니다, ${found.nickname}님!`);
+        location.href='index.html';
+        // 로그인 성공 처리
+      } else {
+        alert("아이디 또는 비밀번호가 잘못되었습니다.");
+      }
+    }
+
+    function goToRegister() {
+      location.href = "register.html";
+    }
+  </script>
+</body>
+</html>

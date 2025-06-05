@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <title>회원가입</title>
+</head>
+<body>
+  <div class="container">
+    <h2>회원가입</h2>
+    <input type="text" id="regId" placeholder="아이디"><br>
+    <input type="password" id="regPw" placeholder="비밀번호"><br>
+    <input type="text" id="regNickname" placeholder="닉네임"><br>
+    <button onclick="register()">등록</button>
+  </div>
+
+  <script>
+    function register() {
+      const id = document.getElementById('regId').value;
+      const pw = document.getElementById('regPw').value;
+      const nickname = document.getElementById('regNickname').value;
+
+      if (!id || !pw || !nickname) {
+        alert("모든 항목을 입력하세요.");
+        return;
+      }
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      const exists = users.some(user => user.id === id);
+      if (exists) {
+        alert("이미 존재하는 아이디입니다.");
+        return;
+      }
+
+      users.push({ id, pw, nickname });
+      localStorage.setItem("users", JSON.stringify(users));
+
+      alert("회원가입이 완료되었습니다. 로그인 해주세요.");
+      location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
